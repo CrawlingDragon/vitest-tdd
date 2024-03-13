@@ -3,6 +3,7 @@ import { reactive } from "vue";
 // import { isWall } from "./map";
 import { useMapState } from "./map";
 import { findCargo, useCargoStore } from "./Cargo";
+import { useTargetStore } from "./target";
 
 export const usePlayState = defineStore('play', () => {
 
@@ -28,7 +29,6 @@ export const usePlayState = defineStore('play', () => {
 
       const isMoveCago = moveCogo(cargo, dx, dy)
       if (!isMoveCago) return
-
     }
     player.x += dx
     player.y += dy

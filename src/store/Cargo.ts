@@ -2,19 +2,21 @@ import { defineStore } from "pinia";
 import { reactive } from "vue";
 import { Position } from "../composables/usePosition";
 import { useMapState } from './map';
+import { useTargetStore } from "./target";
 
 interface Cargo {
   x: number;
   y: number;
+  onTarget: boolean
 }
 
 export const useCargoStore = defineStore('cargo', () => {
-  const cargos: Cargo[] = reactive([])
-  function createCargo(x: number, y: number) {
-    return { x, y }
+  const cargos = reactive<Cargo[]>([])
+  function createCargo(x: number, y: number): Cargo {
+    return { x, y, onTarget: false }
   }
   function addCargo({ x, y }: { x: number, y: number }) {
-    cargos.push({ x, y })
+    cargos.push({ x, y, onTarget: false })
   }
 
   function moveCogo(cargo: Cargo, dx: number, dy: number) {
@@ -23,11 +25,20 @@ export const useCargoStore = defineStore('cargo', () => {
 
     if (isWall(position)) return false;
 
-    const cargo2 = findCargo(position)
 
-    if (cargo2) return false;
+
+
+
+    if (findCargo(position)) return false;
     cargo.x += dx
     cargo.y += dy
+
+    const { findTarget } = useTargetStore()
+    const target = findTarget(cargo)
+    // 这里的！！是把taget 转换成了boolean，如果target存在，则返回true，否则返回false 
+    // cargo.onTarget = true or false
+    cargo.onTarget = !!target
+
     return true;
 
   }

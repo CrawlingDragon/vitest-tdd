@@ -3,7 +3,6 @@ import { reactive } from "vue";
 // import { isWall } from "./map";
 import { useMapState } from "./map";
 import { findCargo, useCargoStore } from "./Cargo";
-import { useTargetStore } from "./target";
 
 export const usePlayState = defineStore('play', () => {
 

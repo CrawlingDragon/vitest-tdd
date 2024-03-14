@@ -1,13 +1,12 @@
 import { usePlayState } from "../store/play";
-import { computed } from "vue";
 export function useMove() {
-  const { player, playMoveLeftHand, playMoveRightHand, playMoveUpHand, playMoveDownHand } = usePlayState();
+  const { playMoveLeftHand, playMoveRightHand, playMoveUpHand, playMoveDownHand } = usePlayState();
 
 
   window.addEventListener('keyup', (e: KeyboardEvent) => {
     switch (e.code) {
       case 'ArrowLeft':
-        console.log('player', player);
+        // console.log('player', player);
         playMoveLeftHand();
         break;
       case 'ArrowRight':

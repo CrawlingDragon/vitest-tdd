@@ -3,6 +3,7 @@ import { beforeEach, describe, it, expect } from "vitest";
 import { useCargoStore } from '../Cargo';
 
 
+
 describe("cargo", () => {
   beforeEach(() => {
     setActivePinia(createPinia())
@@ -13,4 +14,5 @@ describe("cargo", () => {
 
     expect(cargos.length).toBe(1);
   });
+
 });

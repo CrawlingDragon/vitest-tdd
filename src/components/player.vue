@@ -8,8 +8,9 @@ import { computed, onMounted, onUnmounted } from 'vue';
 import PlayerImg from '../assets/keeper.png';
 import { usePlayState } from '../store/play';
 import { usePosition } from '../composables/usePosition';
+import { useGameStore } from '../store/game';
 const { player } = usePlayState();
-
+const { detectionGameCompleted } = useGameStore();
 const { position } = usePosition(player);
 useMove();
 function useMove() {
@@ -29,6 +30,7 @@ function useMove() {
         playMoveDownHand();
         break;
     }
+    detectionGameCompleted();
   }
 
   onMounted(() => {

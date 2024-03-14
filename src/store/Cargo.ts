@@ -17,6 +17,7 @@ export const useCargoStore = defineStore('cargo', () => {
   }
   function addCargo({ x, y }: { x: number, y: number }) {
     cargos.push({ x, y, onTarget: false })
+
   }
 
   function moveCogo(cargo: Cargo, dx: number, dy: number) {
@@ -25,24 +26,22 @@ export const useCargoStore = defineStore('cargo', () => {
 
     if (isWall(position)) return false;
 
-
-
-
-
     if (findCargo(position)) return false;
     cargo.x += dx
     cargo.y += dy
 
     const { findTarget } = useTargetStore()
     const target = findTarget(cargo)
-    // 这里的！！是把taget 转换成了boolean，如果target存在，则返回true，否则返回false 
-    // cargo.onTarget = true or false
+
     cargo.onTarget = !!target
-
+    // console.log('cargos', cargos);
     return true;
-
   }
-  return { cargos, addCargo, createCargo, moveCogo }
+
+  // 这里的！！是把taget 转换成了boolean，如果target存在，则返回true，否则返回false 
+  // cargo.onTarget = true or false
+
+  return { cargos, addCargo, createCargo, moveCogo, }
 })
 
 export function findCargo(position: Position) {

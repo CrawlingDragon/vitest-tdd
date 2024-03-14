@@ -8,6 +8,7 @@
     <template v-for="item in cargos">
       <Cargo :x="item.x" :y="item.y" :onTarget="item.onTarget" />
     </template>
+    <div v-show="game.isCompleted">下一关</div>
   </div>
 </template>
 <script setup lang="ts">
@@ -17,13 +18,17 @@ import Cargo from '../../components/cargo.vue';
 import Target from '../../components/target.vue';
 import { useCargoStore } from '../../store/Cargo';
 import { useTargetStore } from '../../store/target';
+import { useGameStore } from '../../store/game';
 
 const { cargos, addCargo, createCargo } = useCargoStore();
 addCargo(createCargo(2, 2));
 addCargo(createCargo(3, 2));
 
+const cargo = useCargoStore();
 const { targets, addTarget, createTarget } = useTargetStore();
-addTarget(createTarget({ x: 2, y: 3 }));
+addTarget(createTarget({ x: 1, y: 3 }));
 addTarget(createTarget({ x: 3, y: 3 }));
+
+const { game } = useGameStore();
 </script>
 <style lang="scss" scoped></style>
